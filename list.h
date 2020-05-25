@@ -4,9 +4,10 @@
 typedef struct List List;
 struct List
 {
-    int item;
-    List *previous;
-    List *next;
+	int item;
+	List *previous;
+   	List *next;
+	int *err;
 };
 
 typedef enum {
