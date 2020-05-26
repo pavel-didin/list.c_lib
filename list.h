@@ -13,16 +13,8 @@ typedef enum {
 	ESUCCESS = 0,
 	EMALLOC,
 	EFOUND,
-	EINVARG
+	ESIZE
 } LIST_ERR;
-
-stack *init_stack(int size, LIST_ERR *err);
-
-void remove_stack(stack *stack, LIST_ERR *err);
-
-int pop(stack *stack, LIST_ERR *err);
-
-void push(stack *stack, int val, LIST_ERR *err);
 
 List *list_append(List *head, int item, LIST_ERR *err);
 
