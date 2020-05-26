@@ -247,7 +247,7 @@ int list_get(List *list, unsigned index, LIST_ERR *err)
     unsigned i;
     for (i = 0; list; list = list->next, i++)
         if (i == index) {
-            *err = ESUCCESS
+            *err = ESUCCESS;
             return list->item;
         }
 		fprintf(stderr, "Invalig size: list\n");
@@ -256,7 +256,7 @@ int list_get(List *list, unsigned index, LIST_ERR *err)
 		return NOT_FOUND;
 }
 
-void list_set(List *list, unsigned index, int item)
+void list_set(List *list, unsigned index, int item, LIST_ERR *err)
 {
     unsigned i;
     for (i = 0; list; list = list->next, i++)
