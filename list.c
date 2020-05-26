@@ -214,7 +214,7 @@ List *list_insert(List *head, unsigned index, int item, LIST_ERR *err)
 		return head;
 	}
     if (!head || !index)
-        return list_add(head, item);
+        return list_add(head, item, &err);
     for (i = 0; i < index-1; i++)
     {
         list = list->next;
