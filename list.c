@@ -75,7 +75,7 @@ void list_destroy(List *list, LIST_ERR *err)
 		fprintf(stderr, "Not enough memory\n");
 		if (err != NULL)
 			*err = EMALLOC;
-		return head;
+		return list;
 	}
         list = list->next;
         free(list1);
