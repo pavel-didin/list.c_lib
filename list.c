@@ -63,7 +63,7 @@ List *list_add(List *head, int item, LIST_ERR *err)
 void list_destroy(List *list, LIST_ERR *err)
 {
     if (list == NULL) {
-	fprintf(stderr, "Invalig argument: list\n");
+	fprintf(stderr, "Invalig size: list\n");
 	if (err != NULL)
 		*err = ESIZE;
 	return;
