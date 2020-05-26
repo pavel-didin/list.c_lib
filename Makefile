@@ -11,4 +11,4 @@ tests: tests.o list.o
 clean:
 	@rm -rf *.o *.gcno *.gcda *.gcov tests 2&>/dev/null
 tar:
-	tar czvf ../stack.tgz ../list
+	tar czvf ../list.tgz ../list
