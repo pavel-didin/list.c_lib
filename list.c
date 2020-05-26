@@ -65,7 +65,7 @@ void list_destroy(List *list)
     if (list == NULL) {
 	fprintf(stderr, "Invalig argument: list\n");
 	if (err != NULL)
-		*err = EINVARG;
+		*err = ESIZE;
 	return;
     }
     while (list)
