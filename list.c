@@ -6,7 +6,7 @@
 
 #define NOT_FOUND -1
 
-List *list_append(List *head, int item)
+List *list_append(List *head, int item, LIST_ERR *err)
 {
     //create list item
     List *new_item = (List *) malloc(sizeof(List));
@@ -41,7 +41,7 @@ List *list_append(List *head, int item)
     return head;
 }
 
-List *list_add(List *head, int item)
+List *list_add(List *head, int item, LIST_ERR *err)
 {
     //create list item
     List *new_item = (List *) malloc(sizeof(List));
@@ -60,7 +60,7 @@ List *list_add(List *head, int item)
     return new_item;
 }
 
-void list_destroy(List *list)
+void list_destroy(List *list, LIST_ERR *err)
 {
     if (list == NULL) {
 	fprintf(stderr, "Invalig argument: list\n");
@@ -83,7 +83,7 @@ void list_destroy(List *list)
     *err = ESUCCESS;
 }
 
-void list_reverse_print(List *head)
+void list_reverse_print(List *head, LIST_ERR *err)
 {
     List *list = head;
     if (list == NULL) {
@@ -99,7 +99,7 @@ void list_reverse_print(List *head)
     *err = ESUCCESS;
 }
 
-void list_print(List *head)
+void list_print(List *head, LIST_ERR *err)
 {
     List *list = head;
     if (list == NULL) {
@@ -115,7 +115,7 @@ void list_print(List *head)
 }
 
 
-List *list_delete(List *head, unsigned index)
+List *list_delete(List *head, unsigned index, LIST_ERR *err)
 {
     List *list = head;
     unsigned i;
@@ -152,7 +152,7 @@ List *list_delete(List *head, unsigned index)
     return head;
 }
 
-List *list_delete_first(List *head)
+List *list_delete_first(List *head, LIST_ERR *err)
 {
     List *list = head;
     if (list == NULL) {
@@ -175,7 +175,7 @@ List *list_delete_first(List *head)
     return head;
 }
 
-List *list_delete_last(List *head)
+List *list_delete_last(List *head, LIST_ERR *err)
 {
     List *list = head;
     if (list == NULL) {
@@ -203,7 +203,7 @@ List *list_delete_last(List *head)
     return head;
 }
 
-List *list_insert(List *head, unsigned index, int item)
+List *list_insert(List *head, unsigned index, int item, LIST_ERR *err)
 {
     List *list = head, *new_item;
     unsigned i;
@@ -242,7 +242,7 @@ List *list_insert(List *head, unsigned index, int item)
     return head;
 }
 
-int list_get(List *list, unsigned index)
+int list_get(List *list, unsigned index, LIST_ERR *err)
 {
     unsigned i;
     for (i = 0; list; list = list->next, i++)
@@ -271,7 +271,7 @@ void list_set(List *list, unsigned index, int item)
 		*err = ESIZE;
 }
 
-int list_find(List *list, int item)
+int list_find(List *list, int item, LIST_ERR *err)
 {
     unsigned i;
     for (i = 0; list; list = list->next, i++)
@@ -283,7 +283,7 @@ int list_find(List *list, int item)
     return NOT_FOUND;
 }
 
-unsigned list_size(List *list)
+unsigned list_size(List *list, LIST_ERR *err)
 {
     unsigned i;
     for(i = 0; list; list = list->next, i++);
