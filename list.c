@@ -86,11 +86,17 @@ void list_destroy(List *list, LIST_ERR *err)
 void list_reverse_print(List *head, LIST_ERR *err)
 {
     List *list = head;
+    if (head == NULL) {
+		fprintf(stderr, "Invalid size: list\n");
+    if (err != NULL)
+        *err = ESIZE;
+    return;
+	}
     if (list == NULL) {
 		fprintf(stderr, "Not enough memory\n");
-		if (err != NULL)
-			*err = EMALLOC;
-		return;
+    if (err != NULL)
+        *err = EMALLOC;
+    return;
 	}
     for ( ; list->next; list = list->next);
     for ( ; list; list = list->previous)
@@ -119,16 +125,16 @@ List *list_delete(List *head, unsigned index, LIST_ERR *err)
 {
     List *list = head;
     unsigned i;
-    if (list == NULL) {
-		fprintf(stderr, "Not enough memory\n");
-		if (err != NULL)
-			*err = EMALLOC;
-		return head;
-	}
     if (head == NULL) {
 		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
 			*err = ESIZE;
+		return head;
+	}
+    if (list == NULL) {
+		fprintf(stderr, "Not enough memory\n");
+		if (err != NULL)
+			*err = EMALLOC;
 		return head;
 	}
     for (i = 0; i < index; i++)
@@ -155,16 +161,16 @@ List *list_delete(List *head, unsigned index, LIST_ERR *err)
 List *list_delete_first(List *head, LIST_ERR *err)
 {
     List *list = head;
-    if (list == NULL) {
-		fprintf(stderr, "Not enough memory\n");
-		if (err != NULL)
-			*err = EMALLOC;
-		return head;
-	}
     if (head == NULL) {
 		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
 			*err = ESIZE;
+		return head;
+	}
+    if (list == NULL) {
+		fprintf(stderr, "Not enough memory\n");
+		if (err != NULL)
+			*err = EMALLOC;
 		return head;
 	}
     head = head->next;
@@ -178,16 +184,16 @@ List *list_delete_first(List *head, LIST_ERR *err)
 List *list_delete_last(List *head, LIST_ERR *err)
 {
     List *list = head;
-    if (list == NULL) {
-		fprintf(stderr, "Not enough memory\n");
-		if (err != NULL)
-			*err = EMALLOC;
-		return head;
-	}
     if (head == NULL) {
 		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
 			*err = ESIZE;
+		return head;
+	}
+    if (list == NULL) {
+		fprintf(stderr, "Not enough memory\n");
+		if (err != NULL)
+			*err = EMALLOC;
 		return head;
 	}
     if (!head->next)
@@ -275,8 +281,10 @@ int list_find(List *list, int item, LIST_ERR *err)
 {
     unsigned i;
     for (i = 0; list; list = list->next, i++)
-        if (list->item == item)
+        if (list->item == item) {
+            *err = ESUCCESS;
             return i;
+        }
     fprintf(stderr, "Not found: list\n");
 	if (err != NULL)
 		*err = EFOUND;
