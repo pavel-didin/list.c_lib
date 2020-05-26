@@ -119,8 +119,6 @@ int main(void)
 	  fprintf(stdout, "Test_18\t->\tPASSED\n");
   else
 	  fprintf(stdout, "Test_18\t->\tFAILED\n");
-  
-  prinft("%d\n", list_get(list, 0, &err));
 	
   list_insert(list, 2, 9, &err);
 	
