@@ -26,7 +26,7 @@ List *list_append(List *head, int item)
 		fprintf(stderr, "Not enough memory\n");
 		if (err != NULL)
 			*err = EMALLOC;
-		return NULL;
+		return head;
 	}
         //go to the end
         for (list = head; list->next; list = list->next);
