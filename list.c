@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#define NOT_FOUND -1
+
 List *list_append(List *head, int item)
 {
     //create list item
@@ -12,7 +14,7 @@ List *list_append(List *head, int item)
 		fprintf(stderr, "Not enough memory\n");
 		if (err != NULL)
 			*err = EMALLOC;
-		return NULL;
+		return head;
 	}
     new_item->item = item;
     new_item->next = NULL;
@@ -20,6 +22,12 @@ List *list_append(List *head, int item)
     if (head)
     {
         List *list;
+	if (list == NULL) {
+		fprintf(stderr, "Not enough memory\n");
+		if (err != NULL)
+			*err = EMALLOC;
+		return NULL;
+	}
         //go to the end
         for (list = head; list->next; list = list->next);
         list->next = new_item; //append
@@ -41,7 +49,7 @@ List *list_add(List *head, int item)
 		fprintf(stderr, "Not enough memory\n");
 		if (err != NULL)
 			*err = EMALLOC;
-		return NULL;
+		return head;
 	}
     new_item->item = item;
     new_item->previous = NULL;
@@ -55,14 +63,20 @@ List *list_add(List *head, int item)
 void list_destroy(List *list)
 {
     if (list == NULL) {
-		fprintf(stderr, "Invalig argument: list\n");
-		if (err != NULL)
-			*err = EINVARG;
-		return;
-	}
+	fprintf(stderr, "Invalig argument: list\n");
+	if (err != NULL)
+		*err = EINVARG;
+	return;
+    }
     while (list)
     {
         List *list1 = list;
+	if (list1 == NULL) {
+		fprintf(stderr, "Not enough memory\n");
+		if (err != NULL)
+			*err = EMALLOC;
+		return head;
+	}
         list = list->next;
         free(list1);
     }
@@ -112,17 +126,17 @@ List *list_delete(List *head, unsigned index)
 		return head;
 	}
     if (head == NULL) {
-		fprintf(stderr, "Invalig argument: list\n");
+		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
-			*err = EINVARG;
+			*err = ESIZE;
 		return head;
 	}
     for (i = 0; i < index; i++)
     {
-        if (!list->next){
-		    fprintf(stderr, "Invalig argument: list\n");
+        if (!list->next) {
+		    fprintf(stderr, "Invalig size: list\n");
 		    if (err != NULL)
-			    *err = EINVARG;
+			    *err = ESIZE;
 		    return head;
 	    }
         list = list->next;
@@ -148,9 +162,9 @@ List *list_delete_first(List *head)
 		return head;
 	}
     if (head == NULL) {
-		fprintf(stderr, "Invalig argument: list\n");
+		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
-			*err = EINVARG;
+			*err = ESIZE;
 		return head;
 	}
     head = head->next;
@@ -171,9 +185,9 @@ List *list_delete_last(List *head)
 		return head;
 	}
     if (head == NULL) {
-		fprintf(stderr, "Invalig argument: list\n");
+		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
-			*err = EINVARG;
+			*err = ESIZE;
 		return head;
 	}
     if (!head->next)
@@ -194,9 +208,9 @@ List *list_insert(List *head, unsigned index, int item)
     List *list = head, *new_item;
     unsigned i;
     if (!head && index) {
-		fprintf(stderr, "Invalig argument: list\n");
+		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
-			*err = EINVARG;
+			*err = ESIZE;
 		return head;
 	}
     if (!head || !index)
@@ -205,9 +219,9 @@ List *list_insert(List *head, unsigned index, int item)
     {
         list = list->next;
         if (!list){
-		    fprintf(stderr, "Invalig argument: list\n");
+		    fprintf(stderr, "Invalig size: list\n");
 		    if (err != NULL)
-			    *err = EINVARG;
+			    *err = ESIZE;
 		    return head;
 	    }
     }
@@ -236,9 +250,9 @@ int list_get(List *list, unsigned index)
             *err = ESUCCESS
             return list->item;
         }
-		fprintf(stderr, "Invalig argument: list\n");
+		fprintf(stderr, "Invalig size: list\n");
 		if (err != NULL)
-			*err = EINVARG;
+			*err = ESIZE;
 		return NOT_FOUND;
 }
 
@@ -252,9 +266,9 @@ void list_set(List *list, unsigned index, int item)
             *err = ESUCCESS;
             return;
         }
-    fprintf(stderr, "Invalig argument: list\n");
+    fprintf(stderr, "Invalig size: list\n");
 	if (err != NULL)
-		*err = EINVARG;
+		*err = ESIZE;
 }
 
 int list_find(List *list, int item)
@@ -263,9 +277,9 @@ int list_find(List *list, int item)
     for (i = 0; list; list = list->next, i++)
         if (list->item == item)
             return i;
-    fprintf(stderr, "Invalig argument: list\n");
+    fprintf(stderr, "Not found: list\n");
 	if (err != NULL)
-		*err = EINVARG;
+		*err = EFOUND;
     return NOT_FOUND;
 }
 
