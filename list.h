@@ -7,14 +7,12 @@ struct List
 	int item;
 	List *previous;
    	List *next;
-	int *err;
 };
 
 typedef enum {
 	ESUCCESS = 0,
 	EMALLOC,
-	EFULL,
-	EEMPTY,
+	EFOUND,
 	EINVARG
 } LIST_ERR;
 
