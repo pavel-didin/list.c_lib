@@ -13,7 +13,8 @@ typedef enum {
 	ESUCCESS = 0,
 	EMALLOC,
 	EFOUND,
-	ESIZE
+	ESIZE,
+	EEMPTY
 } LIST_ERR;
 
 List *list_append(List *head, int item, LIST_ERR *err);
