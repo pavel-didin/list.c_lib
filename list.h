@@ -21,7 +21,7 @@ List *list_append(List *head, int item, LIST_ERR *err);
 
 List *list_add(List *head, int item, LIST_ERR *err);
 
-void list_destroy(List *list, LIST_ERR *err);
+List *list_destroy(List *list, LIST_ERR *err);
 
 void list_reverse_print(List *head, LIST_ERR *err);
 
