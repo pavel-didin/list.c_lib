@@ -58,7 +58,7 @@ List *list_add(List *head, int item, LIST_ERR *err)
     return new_item;
 }
 
-void list_destroy(List *list, LIST_ERR *err)
+List *list_destroy(List *list, LIST_ERR *err)
 {
     if (list == NULL)
     {
@@ -75,6 +75,7 @@ void list_destroy(List *list, LIST_ERR *err)
     }
     if (err != NULL)
         *err = ESUCCESS;
+    return list;
 }
 
 void list_reverse_print(List *head, LIST_ERR *err)
