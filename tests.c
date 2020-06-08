@@ -6,7 +6,7 @@ int main(void)
     List *list = NULL;
     LIST_ERR err;
 
-    list_destroy(list, &err);
+    list = list_destroy(list, &err);
 
     if(err == EEMPTY)
         fprintf(stdout, "Test_1\t->\tPASSED\n");
@@ -223,12 +223,43 @@ int main(void)
     else
         fprintf(stdout, "Test_31\t->\tFAILED\n");
 
-    list_destroy(list, &err);
+    list = list_destroy(list, &err);
 
     if(err == ESUCCESS)
         fprintf(stdout, "Test_32\t->\tPASSED\n");
     else
         fprintf(stdout, "Test_32\t->\tFAILED\n");
+    
+        list = list_append(list, 1, NULL);
+
+    list = list_add(list, 1, NULL);
+    list = list_add(list, 1, NULL);
+    list = list_add(list, 1, NULL);
+    list = list_add(list, 1, NULL);
+    list = list_add(list, 1, NULL);
+    list = list_add(list, 1, NULL);
+
+    list_reverse_print(list, NULL);
+
+    list_print(list, NULL);
+
+    list = list_delete(list, 1, NULL);
+
+    list = list_delete_first(list, NULL);
+
+    list = list_delete_last(list, NULL);
+
+    list = list_insert(list, 1, 1, NULL);
+
+    list_get(list, 1, NULL);
+
+    list_set(list, 1, 1, NULL);
+
+    list_find(list, 1, NULL);
+
+    list_size(list, NULL);
+
+    list = list_destroy(list, NULL);
 
     return 0;
 }
