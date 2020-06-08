@@ -65,7 +65,7 @@ List *list_destroy(List *list, LIST_ERR *err)
         fprintf(stderr, "List is empty\n");
         if (err != NULL)
             *err = EEMPTY;
-        return;
+        return list;
     }
     while (list)
     {
