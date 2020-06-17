@@ -230,7 +230,7 @@ int main(void)
     else
         fprintf(stdout, "Test_32\t->\tFAILED\n");
 
-    list = list_insert(list, 0, 0, &err);
+    list = list_insert(list, 0, -1, &err);
 
     if(err == ESUCCESS)
         fprintf(stdout, "Test_33\t->\tPASSED\n");
